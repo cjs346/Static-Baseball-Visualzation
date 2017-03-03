@@ -2,15 +2,22 @@
 <html>
 <head>
 	<title>Project 1</title>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.1/d3.js"></script>
-	<style type="text/css">
-		svg { border: solid #ccc 1px; }
-	</style>
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<svg width=500, height=500></svg>
+	<svg width=500 height=500></svg>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.1/d3.js"></script>
+	<script type="text/javascript" src="js/pathGenerator.js"></script>
+	<script type="text/javascript" src="js/ballpark.js"></script>
 	<script type="text/javascript">
 		var svg = d3.select("svg");
+		var park = new Ballpark(svg, {
+			lf: 347,
+			lcf: 390,
+			cf: 396,
+			rcf: 370,
+			rf: 350
+		});
 	</script>
 </body>
 </html>

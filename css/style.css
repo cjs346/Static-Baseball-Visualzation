@@ -1,0 +1,23 @@
+svg {
+  border: solid #ccc 1px;
+}
+
+.grass {
+  fill: green;
+  stroke: none;
+}
+
+.sand {
+  fill: tan;
+  stroke: none;
+}
+
+.baseline {
+  fill: none;
+  stroke: white;
+}
+
+.base {
+  fill: white;
+  stroke: none;
+}
