@@ -219,3 +219,13 @@ Ballpark.prototype.render = function() {
   this.drawOutfield();
   this.drawInfield();
 };
+
+/**
+ * Draws the home run ball markers on the field.
+ * @param hrs An array of objects representing home runs, with keys for the
+ *            `distance`, `horizAngle`, and `homeTeam`.
+ * @TODO
+ */
+Ballpark.prototype.drawHomeRuns = function(hrs) {
+  
+};
