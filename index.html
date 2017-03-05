@@ -13,10 +13,6 @@
 	<script type="text/javascript">
 		var ballparks;
 
-		//function parseParkLine(line) {
-		//	return {Ballpark: line["Ballpark"], LeftField: }
-		//}
-
 		d3.csv("csv/ballparks.csv", function(d) {
 			return{
 				ballpark: d.ballpark,
@@ -53,17 +49,6 @@
 					rf: ballparks[i].rf
 				});
 			}
-		});
-
-		console.log(ballparks.length);
-
-		var svg = d3.select("svg");
-		var park = new Ballpark(svg, {
-			lf: 347,
-			lcf: 390,
-			cf: 396,
-			rcf: 370,
-			rf: 350
 		});
 
 		// @TODO implement drawHomeRuns function
