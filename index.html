@@ -17,6 +17,7 @@
 			return{
 				ballpark: d.ballpark,
 				homeTeam: d.hometeam,
+				teamName: d.hometeamname,
 				lf: +d.leftfield,
 				lcf: +d.leftcenterfield,
 				cf: +d.centerfield,
@@ -40,6 +41,13 @@
 					.attr("x", 24)
 					.attr("y", 24)
 					.attr("font-weight", "bold");
+
+				svg.append("text")
+					.text(ballparks[i].teamName)
+					.attr("font-family", "Helvetica")
+					.attr("text-anchor", "left")
+					.attr("x", 24)
+					.attr("y", 48);
 
 				var park = new Ballpark(svg, {
 					lf: ballparks[i].lf,
