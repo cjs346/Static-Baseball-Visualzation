@@ -223,9 +223,34 @@ Ballpark.prototype.render = function() {
 /**
  * Draws the home run ball markers on the field.
  * @param hrs An array of objects representing home runs, with keys for the
- *            `distance`, `horizAngle`, and `homeTeam`.
- * @TODO
+ *            `distance`, `horizAngle`, and `homeTeam`
+ * @param park The ballpark that the homeruns were hit in
  */
-Ballpark.prototype.drawHomeRuns = function(hrs) {
-  
+Ballpark.prototype.drawHomeRuns = function(hrs, park) {
+  var svg = this.svg;
+
+  hrs.forEach(function(hr) {
+    var x = Ballpark.scaleX(hr.distance * Math.cos((hr.horizAngle - 45) * Math.PI / 180));
+    var y = Ballpark.scaleY(hr.distance * Math.sin((hr.horizAngle - 45) * Math.PI / 180));
+
+    svg.append("image")
+       .attr("x", x - 11)
+       .attr("y", y - 11)
+       .attr("width", 22)
+       .attr("height", 22)
+       .attr(
+         "href",
+         "img/ball-" + (hr.hitterTeam == park.homeTeam ? "home" : "away") +
+         ".png"
+       );
+
+    var season = hr.season % 100 + "";
+    svg.append("text")
+       .text("00".substring(0, 2 - season.length) + season)
+       .attr("x", x)
+       .attr("y", y)
+       .style("alignment-baseline", "middle")
+       .style("text-anchor", "middle")
+       .style("font-weight", "bold");
+  });
 };

@@ -12,9 +12,10 @@
 	<script type="text/javascript" src="js/ballpark.js"></script>
 	<script type="text/javascript">
 		var ballparks;
+		var homeruns;
 
-		d3.csv("csv/ballparks.csv", function(d) {
-			return{
+		var parseBallparkRow = function(d) {
+			return {
 				ballpark: d.ballpark,
 				homeTeam: d.hometeam,
 				teamName: d.hometeamname,
@@ -24,10 +25,31 @@
 				rcf: +d.rightcenterfield,
 				rf: +d.rightfield
 			};
-		}, function(error,data) {
-			ballparks = data;
+		};
 
+		d3.queue()
+			.defer(d3.csv, "csv/ballparks.csv", parseBallparkRow)
+			.defer(d3.csv, "csv/homeruns.csv")
+			.await(function(error, rawBallparks, rawHomeruns) {
+				ballparks = rawBallparks;
+				homeruns = d3.nest()
+										 .key(function(d) { return d.ballpark; })
+										 .entries(rawHomeruns);
+
+				drawBallparks();
+			});
+
+		function drawBallparks() {
 			for (var i = 0; i < ballparks.length; i++) {
+				var ballparkHrs = null;
+				homeruns.forEach(function(hr) {
+					if (hr.key == ballparks[i].ballpark) {
+						ballparkHrs = hr.values;
+					}
+				});
+
+				if (!ballparkHrs) continue;
+
 				var svg = d3.select("#main")
 					.append("svg")
 					.attr("width", 500)
@@ -38,6 +60,7 @@
 					.text(ballparks[i].ballpark)
 					.attr("font-family", "Helvetica")
 					.attr("text-anchor", "left")
+					.attr("alignment-baseline", "hanging")
 					.attr("x", 24)
 					.attr("y", 24)
 					.attr("font-weight", "bold");
@@ -46,6 +69,7 @@
 					.text(ballparks[i].teamName)
 					.attr("font-family", "Helvetica")
 					.attr("text-anchor", "left")
+					.attr("alignment-baseline", "hanging")
 					.attr("x", 24)
 					.attr("y", 48);
 
@@ -56,15 +80,10 @@
 					rcf: ballparks[i].rcf,
 					rf: ballparks[i].rf
 				});
-			}
-		});
 
-		// @TODO implement drawHomeRuns function
-		park.drawHomeRuns([
-			{distance: 450, horizAngle: 45, homeTeam: true},
-			{distance: 499, horizAngle: 62, homeTeam: false},
-			{distance: 530, horizAngle: 11, homeTeam: true}
-		]);
+				park.drawHomeRuns(ballparkHrs, ballparks[i]);
+			}
+		}
 	</script>
 </body>
 </html>

@@ -22,3 +22,11 @@ svg {
   fill: white;
   stroke: none;
 }
+
+.ball {
+  fill: red;
+}
+
+.ball-away {
+  fill: blue;
+}
