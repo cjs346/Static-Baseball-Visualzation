@@ -33,12 +33,19 @@
 				ballparks = rawBallparks;
 				homeruns = d3.nest()
 										 .key(function(d) { return d.ballpark; })
+										 .key(function(d) { return d.season; })
 										 .entries(rawHomeruns);
 
 				drawBallparks();
 			});
 
 		function drawBallparks() {
+			var hrMax = d3.max(homeruns, function(ballparkHrs) {
+				return d3.max(ballparkHrs.values, function(season) {
+					return season.values.length;
+				});
+			});
+
 			for (var i = 0; i < ballparks.length; i++) {
 				var ballparkHrs = null;
 				homeruns.forEach(function(hr) {
@@ -50,7 +57,7 @@
 				var svg = d3.select("#main")
 					.append("svg")
 					.attr("width", 500)
-					.attr("height", 500)
+					.attr("height", 700)
 					.attr("id", ballparks[i].ballpark);
 
 				svg.append("text")
@@ -80,6 +87,7 @@
 
 				if (!ballparkHrs) continue;
 				park.drawHomeRuns(ballparkHrs, ballparks[i]);
+				park.drawBarCharts(ballparkHrs, hrMax);
 			}
 		}
 	</script>

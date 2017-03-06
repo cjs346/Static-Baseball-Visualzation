@@ -33,6 +33,7 @@ var MAX_HR_LENGTH = 550;
 
 // SVG constant dimensions
 var SVG_SIZE = 500;
+var BAR_CHART_SIZE = 200;
 
 // Create scales to map ballpark locations to pixels
 Ballpark.scaleX = d3.scaleLinear()
@@ -222,37 +223,77 @@ Ballpark.prototype.render = function() {
 
 /**
  * Draws the home run ball markers on the field.
- * @param hrs An array of objects representing home runs, with keys for the
- *            `distance`, `horizAngle`, and `homeTeam`
+ * @param hrs An array of home runs
  * @param park The ballpark that the homeruns were hit in
  */
 Ballpark.prototype.drawHomeRuns = function(hrs, park) {
   var svg = this.svg;
-  console.log(hrs);
 
-  hrs.forEach(function(hr) {
+  hrs.forEach(function(season) {
     // if (hr.season != 2016) return;
+    season.values.forEach(function(hr) {
+      var x = Ballpark.scaleX(
+        hr.distance * Math.cos((hr.horizAngle - 45) * Math.PI / 180)
+      );
+      var y = Ballpark.scaleY(
+        hr.distance * Math.sin((hr.horizAngle - 45) * Math.PI / 180)
+      );
 
-    var x = Ballpark.scaleX(
-      hr.distance * Math.cos((hr.horizAngle - 45) * Math.PI / 180)
-    );
-    var y = Ballpark.scaleY(
-      hr.distance * Math.sin((hr.horizAngle - 45) * Math.PI / 180)
-    );
+      svg.append("circle")
+         .attr("cx", x)
+         .attr("cy", y)
+         .attr("r", 10)
+         .style("fill", "rgba(0, 0, 128, 0.05)");
 
-    svg.append("circle")
-       .attr("cx", x)
-       .attr("cy", y)
-       .attr("r", 10)
-       .style("fill", "rgba(0, 0, 128, 0.05)");
+      // var season = hr.season % 100 + "";
+      // svg.append("text")
+      //    .text("00".substring(0, 2 - season.length) + season)
+      //    .attr("x", x)
+      //    .attr("y", y)
+      //    .style("alignment-baseline", "middle")
+      //    .style("text-anchor", "middle")
+      //    .style("font-weight", "bold");
+    });
+  });
+};
 
-    // var season = hr.season % 100 + "";
-    // svg.append("text")
-    //    .text("00".substring(0, 2 - season.length) + season)
-    //    .attr("x", x)
-    //    .attr("y", y)
-    //    .style("alignment-baseline", "middle")
-    //    .style("text-anchor", "middle")
-    //    .style("font-weight", "bold");
+/**
+ * Draws a bar chart under the park showing how many home runs were hit each
+ * year.
+ * @param hrs An array of home runs
+ * @param hrMax The maximum number of home runs hit in any season in any
+ *              ballpark
+ */
+Ballpark.prototype.drawBarCharts = function(hrs, hrMax) {
+  var svg = this.svg;
+
+  var timeScale = d3.scaleLinear()
+                    .domain([0, 11])
+                    .range(
+                      [0, Ballpark.scaleDist(this.rf + GRASS_PADDING) - 1]
+                    );
+  var lengthScale = d3.scaleLinear()
+                      .domain([0, hrMax])
+                      .range([SVG_SIZE, SVG_SIZE + BAR_CHART_SIZE - 20]);
+  var fillScale = function(season) {
+    return season % 2 == 0 ? "#c0392b" : "#e74c3c";
+  }
+
+  hrs.forEach(function(season) {
+    var numHrs = season.values.length;
+    var season = +season.key - 2006;
+
+    svg.append("rect")
+       .attr("x", timeScale(season))
+       .attr("y", lengthScale(0))
+       .attr("width", timeScale(season + 1) - timeScale(season) + 1)
+       .attr("height", lengthScale(numHrs) - lengthScale(0))
+       .style("fill", fillScale(season));
+
+    svg.append("text")
+       .text(numHrs)
+       .attr("x", (timeScale(season) + timeScale(season + 1)) / 2)
+       .attr("y", lengthScale(numHrs) + 5)
+       .attr("class", "bar-label");
   });
 };

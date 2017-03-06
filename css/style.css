@@ -45,3 +45,10 @@ svg:nth-child(odd) {
 .ball-away {
   fill: blue;
 }
+
+.bar-label {
+  alignment-baseline: hanging;
+  text-anchor: middle;
+  font-family: Helvetica;
+  font-size: 12px;
+}
