@@ -19,12 +19,12 @@ svg:nth-child(odd) {
 }
 
 .grass {
-  fill: green;
+  fill: #BACDB2;
   stroke: none;
 }
 
 .sand {
-  fill: tan;
+  fill: #D7D7D7;
   stroke: none;
 }
 

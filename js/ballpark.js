@@ -228,6 +228,8 @@ Ballpark.prototype.render = function() {
  */
 Ballpark.prototype.drawHomeRuns = function(hrs, park) {
   var svg = this.svg;
+  
+  //console.log(hrs.values);
 
   hrs.forEach(function(season) {
     // if (hr.season != 2016) return;
@@ -239,11 +241,25 @@ Ballpark.prototype.drawHomeRuns = function(hrs, park) {
         hr.distance * Math.sin((hr.horizAngle - 45) * Math.PI / 180)
       );
 
-      svg.append("circle")
-         .attr("cx", x)
-         .attr("cy", y)
-         .attr("r", 10)
-         .style("fill", "rgba(0, 0, 128, 0.05)");
+      if(park.homeTeam == hr.hitterTeam){
+        svg.append("circle")
+           .attr("cx", x)
+           .attr("cy", y)
+           .attr("r", 4)
+           .style("fill", "rgb("+ park.color1 + ")")
+           .style("stroke", "rgb(" + park.color2 + ")")
+           .attr("fill-opacity", "0.15")
+           .attr("stroke-opacity", "0.15")
+           .attr("stroke-width", "1");
+      }
+      else{
+        svg.append("circle")
+           .attr("cx", x)
+           .attr("cy", y)
+           .attr("r", 4)
+           .style("fill", "rgba(0, 0, 0, 0.05)");
+      }
+      
 
       // var season = hr.season % 100 + "";
       // svg.append("text")
