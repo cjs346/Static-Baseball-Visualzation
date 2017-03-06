@@ -172,9 +172,9 @@ Ballpark.prototype.drawOutfield = function() {
     .moveTo(-GRASS_PADDING, -GRASS_PADDING)
     .lineTo(this.rf, -GRASS_PADDING)
     .lineTo(this.rf, 0)
-    .lineToPolar(this.rcf, 22.5)
+    .lineToPolar(this.rcf, 30)
     .lineToPolar(this.cf, 45)
-    .lineToPolar(this.lcf, 67.5)
+    .lineToPolar(this.lcf, 60)
     .lineTo(0, this.lf)
     .lineTo(-GRASS_PADDING, this.lf)
     .closePath()
@@ -188,9 +188,9 @@ Ballpark.prototype.drawOutfield = function() {
     .moveTo(-GRASS_PADDING, -GRASS_PADDING)
     .lineTo(this.rf - WARNING_ZONE, -GRASS_PADDING)
     .lineTo(this.rf - WARNING_ZONE, 0)
-    .lineToPolar(this.rcf - WARNING_ZONE, 22.5)
+    .lineToPolar(this.rcf - WARNING_ZONE, 30)
     .lineToPolar(this.cf - WARNING_ZONE, 45)
-    .lineToPolar(this.lcf - WARNING_ZONE, 67.5)
+    .lineToPolar(this.lcf - WARNING_ZONE, 60)
     .lineTo(0, this.lf - WARNING_ZONE)
     .lineTo(-GRASS_PADDING, this.lf - WARNING_ZONE)
     .closePath()
@@ -228,29 +228,31 @@ Ballpark.prototype.render = function() {
  */
 Ballpark.prototype.drawHomeRuns = function(hrs, park) {
   var svg = this.svg;
+  console.log(hrs);
 
   hrs.forEach(function(hr) {
-    var x = Ballpark.scaleX(hr.distance * Math.cos((hr.horizAngle - 45) * Math.PI / 180));
-    var y = Ballpark.scaleY(hr.distance * Math.sin((hr.horizAngle - 45) * Math.PI / 180));
+    // if (hr.season != 2016) return;
 
-    svg.append("image")
-       .attr("x", x - 11)
-       .attr("y", y - 11)
-       .attr("width", 22)
-       .attr("height", 22)
-       .attr(
-         "href",
-         "img/ball-" + (hr.hitterTeam == park.homeTeam ? "home" : "away") +
-         ".png"
-       );
+    var x = Ballpark.scaleX(
+      hr.distance * Math.cos((hr.horizAngle - 45) * Math.PI / 180)
+    );
+    var y = Ballpark.scaleY(
+      hr.distance * Math.sin((hr.horizAngle - 45) * Math.PI / 180)
+    );
 
-    var season = hr.season % 100 + "";
-    svg.append("text")
-       .text("00".substring(0, 2 - season.length) + season)
-       .attr("x", x)
-       .attr("y", y)
-       .style("alignment-baseline", "middle")
-       .style("text-anchor", "middle")
-       .style("font-weight", "bold");
+    svg.append("circle")
+       .attr("cx", x)
+       .attr("cy", y)
+       .attr("r", 10)
+       .style("fill", "rgba(0, 0, 128, 0.05)");
+
+    // var season = hr.season % 100 + "";
+    // svg.append("text")
+    //    .text("00".substring(0, 2 - season.length) + season)
+    //    .attr("x", x)
+    //    .attr("y", y)
+    //    .style("alignment-baseline", "middle")
+    //    .style("text-anchor", "middle")
+    //    .style("font-weight", "bold");
   });
 };

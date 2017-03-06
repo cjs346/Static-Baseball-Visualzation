@@ -1,6 +1,21 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#main {
+  width: 1104px;
+  margin: 0 auto 50px;
+}
+
 svg {
   border: solid #ccc 1px;
-  margin-left: 24px;
+  margin: 50px 25px 0 25px;
+}
+
+svg:nth-child(odd) {
+  /*clear: left;*/
 }
 
 .grass {
