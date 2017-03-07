@@ -269,9 +269,8 @@ Ballpark.prototype.drawBarCharts = function(hrs, hrMax, park) {
   var svg = this.svg;
 
   var timeScale = d3.scaleLinear()
-                    .domain([0, 11])
-                    .range([0, 500]);
-                    //.range([0, Ballpark.scaleDist(this.rf + GRASS_PADDING) - 1]);
+                    .domain([2006, 2016])
+                    .range([20, SVG_SIZE - 20]);
   var lengthScale = d3.scaleLinear()
                       .domain([0, hrMax])
                       .range([SVG_SIZE + BAR_CHART_SIZE, SVG_SIZE]);
@@ -279,9 +278,9 @@ Ballpark.prototype.drawBarCharts = function(hrs, hrMax, park) {
   var seasonHRs=[];
   var homeHRs=[];
 
-  hrs.forEach(function(season) {    
+  hrs.forEach(function(season) {
     var numHrs = season.values.length;
-    var thisSeason = +season.key - 2006;
+    var thisSeason = +season.key;
     var homeTeamHrs = 0;
 
     season.values.forEach(function(hr) {
@@ -291,45 +290,44 @@ Ballpark.prototype.drawBarCharts = function(hrs, hrMax, park) {
     seasonHRs.push({season: thisSeason, homeRuns: numHrs});
     homeHRs.push({season: thisSeason, homeRuns: homeTeamHrs});
 
-    //total home runs
+    // Total home runs
     svg.append("circle")
-        .attr("cx", timeScale(thisSeason)+10)
+        .attr("cx", timeScale(thisSeason))
         .attr("cy", lengthScale(numHrs))
         .attr("r", "4px");
-    //home team home runs
+    // Home team home runs
     svg.append("circle")
-        .attr("cx", timeScale(thisSeason)+10)
+        .attr("cx", timeScale(thisSeason))
         .attr("cy", lengthScale(homeTeamHrs))
         .attr("r", "4px")
         .style("fill", "rgb("+ park.color1 + ")");
-    //svg.append("rect")
-    //    .attr("x", timeScale(season))
-    //    .attr("y", lengthScale(numHrs))
-    //    .attr("width", timeScale(season + 1) - timeScale(season) + 1)
-    //    .attr("height", "50px")
-    //    .style("fill", fillScale(season));
   });
 
+  var line = d3.line()
+      .x(function(d) { return timeScale(d.season); })
+      .y(function(d) { return lengthScale(d.homeRuns); });
 
-    var line = d3.line()
-        .x(function(d) { return timeScale(d.season)+10; })
-        .y(function(d) { return lengthScale(d.homeRuns); });
+  var totalLine = svg.append("path")
+      .datum(seasonHRs)
+      .attr("fill", "none")
+      .attr("stroke", "black")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
 
-    var totalLine = svg.append("path")
-        .datum(seasonHRs)
-        .attr("fill", "none")
-        .attr("stroke", "black")
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .attr("stroke-width", 1.5)
-        .attr("d", line);
+  var homeLine = svg.append("path")
+      .datum(homeHRs)
+      .attr("fill", "none")
+      .attr("stroke", "rgb("+ park.color1 + ")")
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("stroke-width", 1.5)
+      .attr("d", line);
 
-    var homeLine = svg.append("path")
-        .datum(homeHRs)
-        .attr("fill", "none")
-        .attr("stroke", "rgb("+ park.color1 + ")")
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .attr("stroke-width", 1.5)
-        .attr("d", line);
+  // Create labels for the axes
+  var timeAxis = d3.axisBottom(timeScale).tickFormat(d3.format("4"));
+  svg.append("g")
+    .attr("transform", "translate(0, " + (SVG_SIZE + BAR_CHART_SIZE - 20) + ")")
+    .call(timeAxis);
 };

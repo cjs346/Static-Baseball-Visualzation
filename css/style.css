@@ -4,10 +4,7 @@ body {
   padding: 0;
 }
 
-#parks,
-#trajectories {
-  width: 1104px;
-  margin: 0 auto 50px;
+body {
   background: repeating-linear-gradient(
     to right,
     #F4F9FF,
@@ -16,17 +13,27 @@ body {
     #FFFFFF 16px);
 }
 
-h1{
+#parks,
+#trajectories {
+  width: 1104px;
+  margin: 0 auto 50px;
+}
+
+#parks svg,
+#trajectories {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+h1 {
   font-family: "Open Sans";
   text-align: center;
 }
 
-h2{
+h2 {
   font-family: "Open Sans";
 }
 
 #parks svg {
-  background-color: rgba(255, 255, 255, 0.5);
   //border: solid #ccc 1px;
   margin: 50px 25px 0 25px;
 }
