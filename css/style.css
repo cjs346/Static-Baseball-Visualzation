@@ -4,7 +4,8 @@ body {
   padding: 0;
 }
 
-#main {
+#parks,
+#trajectories {
   width: 1104px;
   margin: 0 auto 50px;
   background: repeating-linear-gradient(
@@ -20,13 +21,18 @@ h1{
   text-align: center;
 }
 
-svg {
+h2{
+  font-family: "Open Sans";
+}
+
+#parks svg {
+  background-color: rgba(255, 255, 255, 0.5);
   //border: solid #ccc 1px;
   margin: 50px 25px 0 25px;
 }
 
-svg:nth-child(odd) {
-  /*clear: left;*/
+text {
+  font-family: Helvetica, sans-serif;
 }
 
 .grass {

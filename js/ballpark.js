@@ -270,9 +270,8 @@ Ballpark.prototype.drawBarCharts = function(hrs, hrMax, park) {
 
   var timeScale = d3.scaleLinear()
                     .domain([0, 11])
-                    .range(
-                      [0, Ballpark.scaleDist(this.rf + GRASS_PADDING) - 1]
-                    );
+                    .range([0, 500]);
+                    //.range([0, Ballpark.scaleDist(this.rf + GRASS_PADDING) - 1]);
   var lengthScale = d3.scaleLinear()
                       .domain([0, hrMax])
                       .range([SVG_SIZE + BAR_CHART_SIZE, SVG_SIZE]);
