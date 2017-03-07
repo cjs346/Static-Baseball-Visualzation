@@ -5,13 +5,17 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<div id="main"></div>
+	<div id="trajectories">
+		<h2>Long home runs vs. high home runs</h2>
+	</div>
+	<div id="parks"></div>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.1/d3.js"></script>
 	<script type="text/javascript" src="js/pathGenerator.js"></script>
 	<script type="text/javascript" src="js/ballpark.js"></script>
 	<script type="text/javascript">
 		var ballparks;
 		var homeruns;
+		var seasonHrs;
 
 		var parseBallparkRow = function(d) {
 			return {
@@ -35,7 +39,11 @@
 										 .key(function(d) { return d.ballpark; })
 										 .key(function(d) { return d.season; })
 										 .entries(rawHomeruns);
+				seasonHrs = d3.nest()
+											.key(function(d) { return d.season; })
+											.entries(rawHomeruns);
 
+				drawTrajectories();
 				drawBallparks();
 			});
 
@@ -54,7 +62,7 @@
 					}
 				});
 
-				var svg = d3.select("#main")
+				var svg = d3.select("#parks")
 					.append("svg")
 					.attr("width", 500)
 					.attr("height", 700)
@@ -89,6 +97,115 @@
 				park.drawHomeRuns(ballparkHrs, ballparks[i]);
 				park.drawBarCharts(ballparkHrs, hrMax);
 			}
+		}
+
+		function drawTrajectories() {
+			var TRAJ_WIDTH = 1100;
+			var TRAJ_HEIGHT = 500;
+
+			// Create an SVG element to draw the trajectories on
+			var svg = d3.select("#trajectories")
+									.append("svg")
+									.attr("width", TRAJ_WIDTH)
+									.attr("height", TRAJ_HEIGHT);
+
+			// Create a legend for the highest and longest home runs
+			svg.append("rect")
+				 .attr("x", TRAJ_WIDTH - 300)
+				 .attr("y", 20)
+				 .attr("width", 15)
+				 .attr("height", 15)
+				 .style("fill", "rgba(0, 0, 128, 0.5)");
+		 	svg.append("rect")
+				 .attr("x", TRAJ_WIDTH - 300)
+			   .attr("y", 45)
+			   .attr("width", 15)
+				 .attr("height", 15)
+				 .style("fill", "rgba(128, 0, 0, 0.5)");
+			svg.append("text")
+				 .text("Longest home run of the season")
+				 .attr("x", TRAJ_WIDTH - 275)
+				 .attr("y", 27.5)
+				 .style("alignment-baseline", "middle")
+				 .style("text-anchor", "start");
+		  svg.append("text")
+			   .text("Highest home run of the season")
+			 	 .attr("x", TRAJ_WIDTH - 275)
+			 	 .attr("y", 52.5)
+			 	 .style("alignment-baseline", "middle")
+				 .style("text-anchor", "start");
+
+			// Create scales for plotting the trajectories
+			var distanceScale = d3.scaleLinear()
+														.domain([0, 504])
+														.range([50, TRAJ_WIDTH - 20]);
+			var heightScale = d3.scaleLinear()
+													.domain([0, 180])
+													.range([TRAJ_HEIGHT - 40, 20]);
+
+			// Create axes for the home runs
+			var distanceAxis = d3.axisBottom(distanceScale);
+			svg.append("g")
+				 .attr("transform", "translate(0, " + (TRAJ_HEIGHT - 40) + ")")
+				 .call(distanceAxis);
+			var heightAxis = d3.axisLeft(heightScale);
+ 			svg.append("g")
+	 				 .attr("transform", "translate(50, 0)")
+	 				 .call(heightAxis);
+
+			// Create axis labels
+			svg.append("text")
+				 .text("Distance (ft)")
+				 .attr("x", distanceScale(252))
+				 .attr("y", TRAJ_HEIGHT - 7)
+				 .style("alignment-baseline", "baseline")
+				 .style("text-anchor", "middle")
+				 .style("font-size", "12px");
+			svg.append("text")
+				 .text("Height (ft)")
+				 .attr("transform", "rotate(-90) translate(" + -heightScale(90) + ", 15)")
+				 .style("alignment-baseline", "baseline")
+				 .style("text-anchor", "middle")
+				 .style("font-size", "12px");
+
+			// Go through each of the seasons
+			seasonHrs.forEach(function(season, i) {
+				// Find the longest home run for that season
+				var longestHr = season.values.sort(function(a, b) {
+					return b.distance - a.distance;
+				})[0];
+
+				// Find the highest home run for that season
+				var highestHr = season.values.sort(function(a, b) {
+					return b.apex - a.apex;
+				})[0];
+
+				// Plot the longest home run's trajectory
+				var longPath = new PathGenerator(distanceScale, heightScale)
+				.moveTo(0, 3)
+				.quadraticCurveTo(
+					longestHr.distance * 0.7, longestHr.apex * 2, longestHr.distance, 0
+				)
+				.getPath();
+				svg.append("path")
+				.attr("d", longPath.toString())
+				.style("stroke", "rgba(0, 0, 128, 0.4)")
+				.style("stroke-width", 2)
+					 .style("fill", "none");
+
+				// Plot the highest home run's trajectory
+ 				var highPath = new PathGenerator(distanceScale, heightScale)
+	 				.moveTo(0, 3)
+	 				.quadraticCurveTo(
+	 					highestHr.distance * 0.7, highestHr.apex * 2, highestHr.distance, 0
+	 				)
+	 				.getPath();
+ 				svg.append("path")
+	 				 .attr("d", highPath.toString())
+	 			 	 .style("stroke", "rgba(128, 0, 0, 0.4)")
+	 			   .style("stroke-width", 2)
+	  			 .style("fill", "none");
+			});
 		}
 	</script>
 </body>

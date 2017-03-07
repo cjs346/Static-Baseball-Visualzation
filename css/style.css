@@ -4,18 +4,19 @@ body {
   padding: 0;
 }
 
-#main {
+#parks,
+#trajectories {
   width: 1104px;
   margin: 0 auto 50px;
 }
 
-svg {
+#parks svg {
   border: solid #ccc 1px;
   margin: 50px 25px 0 25px;
 }
 
-svg:nth-child(odd) {
-  /*clear: left;*/
+text {
+  font-family: Helvetica, sans-serif;
 }
 
 .grass {
