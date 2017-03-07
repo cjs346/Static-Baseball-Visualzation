@@ -7,10 +7,21 @@ body {
 #main {
   width: 1104px;
   margin: 0 auto 50px;
+  background: repeating-linear-gradient(
+    to right,
+    #F4F9FF,
+    #F4F9FF 8px,
+    #FFFFFF 8px,
+    #FFFFFF 16px);
+}
+
+h1{
+  font-family: "Open Sans";
+  text-align: center;
 }
 
 svg {
-  border: solid #ccc 1px;
+  //border: solid #ccc 1px;
   margin: 50px 25px 0 25px;
 }
 

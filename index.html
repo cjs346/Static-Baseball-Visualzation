@@ -3,12 +3,16 @@
 <head>
 	<title>Project 1</title>
 	<link rel="stylesheet" href="css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
 <body>
-	<div id="main"></div>
+	<div id="main">
+		<h1>Where do the balls go?</h1>
+	</div>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.1/d3.js"></script>
 	<script type="text/javascript" src="js/pathGenerator.js"></script>
 	<script type="text/javascript" src="js/ballpark.js"></script>
+
 	<script type="text/javascript">
 		var ballparks;
 		var homeruns;
@@ -64,34 +68,36 @@
 
 				svg.append("text")
 					.text(ballparks[i].ballpark)
-					.attr("font-family", "Helvetica")
+					.attr("font-family", "Open Sans")
 					.attr("text-anchor", "left")
 					.attr("alignment-baseline", "hanging")
 					.attr("x", 24)
-					.attr("y", 24)
-					.attr("font-weight", "bold");
+					.attr("y", 12)
+					.attr("font-weight", "bold")
+					.attr("font-size", "32px");
 	
 				svg.append("text")
 					.text(ballparks[i].teamName)
-					.attr("font-family", "Helvetica")
+					.attr("font-family", "Open Sans")
 					.attr("text-anchor", "left")
 					.attr("alignment-baseline", "hanging")
 					.attr("x", 24)
-					.attr("y", 48);
+					.attr("y", 56)
+					.attr("font-size", "18px");
 
 				var park = new Ballpark(svg, {
 					lf: ballparks[i].lf,
 					lcf: ballparks[i].lcf,
 					cf: ballparks[i].cf,
 					rcf: ballparks[i].rcf,
-					rf: ballparks[i].rf
+					rf: ballparks[i].rf,
 				});
 
 				//console.log(ballparkHrs);
 
 				if (!ballparkHrs) continue;
 				park.drawHomeRuns(ballparkHrs, ballparks[i]);
-				park.drawBarCharts(ballparkHrs, hrMax);
+				park.drawBarCharts(ballparkHrs, hrMax, ballparks[i]);
 			}
 		}
 	</script>

@@ -228,8 +228,6 @@ Ballpark.prototype.render = function() {
  */
 Ballpark.prototype.drawHomeRuns = function(hrs, park) {
   var svg = this.svg;
-  
-  //console.log(hrs.values);
 
   hrs.forEach(function(season) {
     // if (hr.season != 2016) return;
@@ -247,28 +245,15 @@ Ballpark.prototype.drawHomeRuns = function(hrs, park) {
            .attr("cy", y)
            .attr("r", 4)
            .style("fill", "rgb("+ park.color1 + ")")
-           .style("stroke", "rgb(" + park.color2 + ")")
-           .attr("fill-opacity", "0.15")
-           .attr("stroke-opacity", "0.15")
-           .attr("stroke-width", "1");
+           .attr("fill-opacity", "0.25")
       }
       else{
         svg.append("circle")
            .attr("cx", x)
            .attr("cy", y)
            .attr("r", 4)
-           .style("fill", "rgba(0, 0, 0, 0.05)");
+           .style("fill", "rgba(0, 0, 0, 0.25)");
       }
-      
-
-      // var season = hr.season % 100 + "";
-      // svg.append("text")
-      //    .text("00".substring(0, 2 - season.length) + season)
-      //    .attr("x", x)
-      //    .attr("y", y)
-      //    .style("alignment-baseline", "middle")
-      //    .style("text-anchor", "middle")
-      //    .style("font-weight", "bold");
     });
   });
 };
@@ -280,7 +265,7 @@ Ballpark.prototype.drawHomeRuns = function(hrs, park) {
  * @param hrMax The maximum number of home runs hit in any season in any
  *              ballpark
  */
-Ballpark.prototype.drawBarCharts = function(hrs, hrMax) {
+Ballpark.prototype.drawBarCharts = function(hrs, hrMax, park) {
   var svg = this.svg;
 
   var timeScale = d3.scaleLinear()
@@ -290,26 +275,62 @@ Ballpark.prototype.drawBarCharts = function(hrs, hrMax) {
                     );
   var lengthScale = d3.scaleLinear()
                       .domain([0, hrMax])
-                      .range([SVG_SIZE, SVG_SIZE + BAR_CHART_SIZE - 20]);
-  var fillScale = function(season) {
-    return season % 2 == 0 ? "#c0392b" : "#e74c3c";
-  }
+                      .range([SVG_SIZE + BAR_CHART_SIZE, SVG_SIZE]);
 
-  hrs.forEach(function(season) {
+  var seasonHRs=[];
+  var homeHRs=[];
+
+  hrs.forEach(function(season) {    
     var numHrs = season.values.length;
-    var season = +season.key - 2006;
+    var thisSeason = +season.key - 2006;
+    var homeTeamHrs = 0;
 
-    svg.append("rect")
-       .attr("x", timeScale(season))
-       .attr("y", lengthScale(0))
-       .attr("width", timeScale(season + 1) - timeScale(season) + 1)
-       .attr("height", lengthScale(numHrs) - lengthScale(0))
-       .style("fill", fillScale(season));
+    season.values.forEach(function(hr) {
+        if(hr.hitterTeam == park.homeTeam){homeTeamHrs++;}
+    });
 
-    svg.append("text")
-       .text(numHrs)
-       .attr("x", (timeScale(season) + timeScale(season + 1)) / 2)
-       .attr("y", lengthScale(numHrs) + 5)
-       .attr("class", "bar-label");
+    seasonHRs.push({season: thisSeason, homeRuns: numHrs});
+    homeHRs.push({season: thisSeason, homeRuns: homeTeamHrs});
+
+    //total home runs
+    svg.append("circle")
+        .attr("cx", timeScale(thisSeason)+10)
+        .attr("cy", lengthScale(numHrs))
+        .attr("r", "4px");
+    //home team home runs
+    svg.append("circle")
+        .attr("cx", timeScale(thisSeason)+10)
+        .attr("cy", lengthScale(homeTeamHrs))
+        .attr("r", "4px")
+        .style("fill", "rgb("+ park.color1 + ")");
+    //svg.append("rect")
+    //    .attr("x", timeScale(season))
+    //    .attr("y", lengthScale(numHrs))
+    //    .attr("width", timeScale(season + 1) - timeScale(season) + 1)
+    //    .attr("height", "50px")
+    //    .style("fill", fillScale(season));
   });
+
+
+    var line = d3.line()
+        .x(function(d) { return timeScale(d.season)+10; })
+        .y(function(d) { return lengthScale(d.homeRuns); });
+
+    var totalLine = svg.append("path")
+        .datum(seasonHRs)
+        .attr("fill", "none")
+        .attr("stroke", "black")
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("stroke-width", 1.5)
+        .attr("d", line);
+
+    var homeLine = svg.append("path")
+        .datum(homeHRs)
+        .attr("fill", "none")
+        .attr("stroke", "rgb("+ park.color1 + ")")
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("stroke-width", 1.5)
+        .attr("d", line);
 };
