@@ -287,12 +287,12 @@ Ballpark.prototype.drawBarCharts = function(hrs, hrMax, park) {
   var seasonHRs=[];
   var homeHRs=[];
 
+  hrs = hrs.sort(function(a, b) { return a.key - b.key; });
+
   hrs.forEach(function(season) {
     var numHrs = season.values.length;
     var thisSeason = +season.key;
     var homeTeamHrs = 0;
-
-    console.log(season);
 
     season.values.forEach(function(hr) {
         if(hr.hitterTeam == park.homeTeam){homeTeamHrs++;}
