@@ -245,7 +245,7 @@ Ballpark.prototype.drawHomeRuns = function(hrs, park) {
            .attr("cx", x)
            .attr("cy", y)
            .attr("r", 4)
-           .style("fill", "rgb("+ park.color1 + ")")
+           .style("fill", "rgb("+ park.color + ")")
            .attr("fill-opacity", "0.25")
       }
       else{
@@ -292,6 +292,8 @@ Ballpark.prototype.drawBarCharts = function(hrs, hrMax, park) {
     var thisSeason = +season.key;
     var homeTeamHrs = 0;
 
+    console.log(season);
+
     season.values.forEach(function(hr) {
         if(hr.hitterTeam == park.homeTeam){homeTeamHrs++;}
     });
@@ -309,7 +311,7 @@ Ballpark.prototype.drawBarCharts = function(hrs, hrMax, park) {
         .attr("cx", timeScale(thisSeason))
         .attr("cy", lengthScale(homeTeamHrs)+24)
         .attr("r", "3px")
-        .style("fill", "rgb("+ park.color1 + ")");
+        .style("fill", "rgb("+ park.color + ")");
   });
 
   var line = d3.line()
@@ -328,7 +330,7 @@ Ballpark.prototype.drawBarCharts = function(hrs, hrMax, park) {
   var homeLine = svg.append("path")
       .datum(homeHRs)
       .attr("fill", "none")
-      .attr("stroke", "rgb("+ park.color1 + ")")
+      .attr("stroke", "rgb("+ park.color + ")")
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")
       .attr("stroke-width", 1.5)
@@ -367,7 +369,7 @@ Ballpark.prototype.drawBarCharts = function(hrs, hrMax, park) {
     .attr("y", BAR_CHART_HEIGHT + 15+36)
     .attr("width", 15)
     .attr("height", 15)
-    .style("fill", "rgb(" + park.color1 + ")");
+    .style("fill", "rgb(" + park.color + ")");
   svg.append("text")
     .text("Home team home runs")
     .attr("x", PARK_SIZE + 92)
