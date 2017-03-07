@@ -26,7 +26,9 @@
 				lcf: +d.leftcenterfield,
 				cf: +d.centerfield,
 				rcf: +d.rightcenterfield,
-				rf: +d.rightfield
+				rf: +d.rightfield,
+				color1: d.hometeamcolor1,
+				color2: d.hometeamcolor2
 			};
 		};
 
@@ -76,7 +78,7 @@
 					.attr("x", 24)
 					.attr("y", 24)
 					.attr("font-weight", "bold");
-
+	
 				svg.append("text")
 					.text(ballparks[i].teamName)
 					.attr("font-family", "Helvetica")
@@ -92,6 +94,8 @@
 					rcf: ballparks[i].rcf,
 					rf: ballparks[i].rf
 				});
+
+				//console.log(ballparkHrs);
 
 				if (!ballparkHrs) continue;
 				park.drawHomeRuns(ballparkHrs, ballparks[i]);
