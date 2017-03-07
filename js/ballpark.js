@@ -32,19 +32,20 @@ var GRASS_PADDING = 20;
 var MAX_HR_LENGTH = 550;
 
 // SVG constant dimensions
-var SVG_SIZE = 500;
-var BAR_CHART_SIZE = 200;
+var PARK_SIZE = 500;
+var BAR_CHART_WIDTH = 400;
+var BAR_CHART_HEIGHT = 200;
 
 // Create scales to map ballpark locations to pixels
 Ballpark.scaleX = d3.scaleLinear()
                     .domain([-GRASS_PADDING, MAX_HR_LENGTH])
-                    .range([0, SVG_SIZE]);
+                    .range([0, PARK_SIZE]);
 Ballpark.scaleY = d3.scaleLinear()
                     .domain([-GRASS_PADDING, MAX_HR_LENGTH])
-                    .range([SVG_SIZE, 0]);
+                    .range([PARK_SIZE, 0]);
 Ballpark.scaleDist = d3.scaleLinear()
                        .domain([0, GRASS_PADDING + MAX_HR_LENGTH])
-                       .range([0, SVG_SIZE]);
+                       .range([0, PARK_SIZE]);
 
 /**
  * Draws the infield, including the sand, the grass diamond, the pitcher's
@@ -268,12 +269,20 @@ Ballpark.prototype.drawHomeRuns = function(hrs, park) {
 Ballpark.prototype.drawBarCharts = function(hrs, hrMax, park) {
   var svg = this.svg;
 
+  // Draw a background for the chart
+  svg.append("rect")
+    .attr("x", PARK_SIZE)
+    .attr("y", 0)
+    .attr("width", BAR_CHART_WIDTH)
+    .attr("height", PARK_SIZE)
+    .style("fill", "rgba(0, 0, 0, 0.05)")
+
   var timeScale = d3.scaleLinear()
                     .domain([2006, 2016])
-                    .range([20, SVG_SIZE - 20]);
+                    .range([PARK_SIZE + 40, PARK_SIZE + BAR_CHART_WIDTH - 20]);
   var lengthScale = d3.scaleLinear()
                       .domain([0, hrMax])
-                      .range([SVG_SIZE + BAR_CHART_SIZE, SVG_SIZE]);
+                      .range([BAR_CHART_HEIGHT - 20, 20]);
 
   var seasonHRs=[];
   var homeHRs=[];
@@ -328,6 +337,40 @@ Ballpark.prototype.drawBarCharts = function(hrs, hrMax, park) {
   // Create labels for the axes
   var timeAxis = d3.axisBottom(timeScale).tickFormat(d3.format("4"));
   svg.append("g")
-    .attr("transform", "translate(0, " + (SVG_SIZE + BAR_CHART_SIZE - 20) + ")")
+    .attr(
+      "transform",
+      "translate(0, " + (BAR_CHART_HEIGHT - 20) + ")")
     .call(timeAxis);
+  var countAxis = d3.axisLeft(lengthScale);
+  svg.append("g")
+    .attr("transform", "translate(" + (PARK_SIZE + 40) + ", 0)")
+    .call(countAxis);
+
+  // Create a legend
+  svg.append("rect")
+    .attr("x", PARK_SIZE + 70)
+    .attr("y", BAR_CHART_HEIGHT + 15)
+    .attr("width", 15)
+    .attr("height", 15)
+    .style("fill", "rgb(" + park.color1 + ")");
+  svg.append("text")
+    .text("Home team home runs")
+    .attr("x", PARK_SIZE + 92)
+    .attr("y", BAR_CHART_HEIGHT + 22.5)
+    .style("text-anchor", "left")
+    .style("alignment-baseline", "middle")
+    .style("font-size", "12px");
+  svg.append("rect")
+    .attr("x", PARK_SIZE + 230)
+    .attr("y", BAR_CHART_HEIGHT + 15)
+    .attr("width", 15)
+    .attr("height", 15)
+    .style("fill", "black");
+  svg.append("text")
+    .text("Total home runs")
+    .attr("x", PARK_SIZE + 252)
+    .attr("y", BAR_CHART_HEIGHT + 22.5)
+    .style("text-anchor", "left")
+    .style("alignment-baseline", "middle")
+    .style("font-size", "12px");
 };

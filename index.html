@@ -71,8 +71,8 @@
 
 				var svg = d3.select("#parks")
 					.append("svg")
-					.attr("width", 500)
-					.attr("height", 700)
+					.attr("width", 900)
+					.attr("height", 500)
 					.attr("id", ballparks[i].ballpark);
 
 				svg.append("text")
@@ -111,7 +111,7 @@
 		}
 
 		function drawTrajectories() {
-			var TRAJ_WIDTH = 1100;
+			var TRAJ_WIDTH = 900;
 			var TRAJ_HEIGHT = 500;
 
 			// Create an SVG element to draw the trajectories on

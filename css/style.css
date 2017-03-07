@@ -15,7 +15,7 @@ body {
 
 #parks,
 #trajectories {
-  width: 1104px;
+  width: 904px;
   margin: 0 auto 50px;
 }
 
@@ -34,8 +34,9 @@ h2 {
 }
 
 #parks svg {
-  //border: solid #ccc 1px;
-  margin: 50px 25px 0 25px;
+  /*//border: solid #ccc 1px;*/
+  /*margin: 50px 25px 0 25px;*/
+  margin-bottom: 50px;
 }
 
 text {
