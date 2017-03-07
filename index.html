@@ -11,16 +11,27 @@
 	</div>
 	<div id="trajectories">
 		<h2>Long home runs vs. high home runs</h2>
-		<p> From this trajectory mapping we can clearly see that the highest hit homeruns do not correspond to the farthest homeruns hit.</p>
+		<div id="trajectories-plot"></div>
+		<p>
+			From this trajectory mapping we can see that hitting the ball high does
+			not always correspond to hitting the ball far. In fact, the highest home
+			runs were hit at an average angle of 40 degrees from the horizontal, while
+			the longest home runs were hit, on average, at only a 25 degree angle.
+			Despite this lower angle, the longest home runs travelled an average of
+			491 feet, compared to just 379 feet for the highest home runs.
+		</p>
 	</div>
-	<div id="parks"><h2> Homeruns or Away-runs?</h2>
-	<p> Underneath every major league stadium is mapped to scale along with every homerun hit within the last 10 years, from 2006 to 2016. Each stadium highlights homeruns by the home team against the away team.</p></div>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.1/d3.js"></script>
+	<div id="parks">
+		<h2> Home runs or away runs?</h2>
+		<p>Underneath, every major league stadium is mapped to scale along with
+			every home run hit within the last 11 seasons, from 2006 to 2016. Each
+			stadium shows the home runs hit by the home team and the away team.
+		</p>
+	</div>
 
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.1/d3.js"></script>
 	<script type="text/javascript" src="js/pathGenerator.js"></script>
 	<script type="text/javascript" src="js/ballpark.js"></script>
-
-
 	<script type="text/javascript">
 		var ballparks;
 		var homeruns;
@@ -168,7 +179,7 @@
 			var TRAJ_HEIGHT = 500;
 
 			// Create an SVG element to draw the trajectories on
-			var svg = d3.select("#trajectories")
+			var svg = d3.select("#trajectories-plot")
 									.append("svg")
 									.attr("width", TRAJ_WIDTH)
 									.attr("height", TRAJ_HEIGHT);

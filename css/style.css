@@ -15,12 +15,28 @@ body {
 
 #parks,
 #trajectories {
-  width: 904px;
+  width: 900px;
   margin: 0 auto 50px;
+  padding: 16px 0;
 }
 
 #trajectories {
   background-color: rgba(255, 255, 255, 1);
+}
+
+#trajectories svg {
+  margin-top: 16px;
+}
+
+h2,
+p {
+  padding: 0 16px;
+  margin: 16px 0 0;
+}
+
+h2:first-child,
+p:first-child {
+  margin-top: 0;
 }
 
 h1 {
@@ -32,12 +48,12 @@ h2 {
   font-family: "Open Sans";
 }
 
-#parks{
+#parks {
   background-color: rgba(255, 255, 255, 1);
 }
 
 #parks svg {
-  margin-bottom: 50px;
+  margin-top: 50px;
   background-color: rgba(255, 255, 255, 1);
 }
 
