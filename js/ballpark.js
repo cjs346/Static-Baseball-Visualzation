@@ -15,7 +15,7 @@ var Ballpark = function(svg, dimensions) {
   this.cf  = dimensions.cf;
   this.rcf = dimensions.rcf;
   this.rf = dimensions.rf;
-
+//this.description = 
   // Render the field
   this.render();
 };
@@ -373,4 +373,6 @@ Ballpark.prototype.drawBarCharts = function(hrs, hrMax, park) {
     .style("text-anchor", "left")
     .style("alignment-baseline", "middle")
     .style("font-size", "12px");
+//console.log(park);
+
 };

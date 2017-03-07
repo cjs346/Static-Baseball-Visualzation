@@ -16,7 +16,7 @@
 	<div id="parks"><h2> Homeruns or Away-runs?</h2>
 	<p> Underneath every major league stadium is mapped to scale along with every homerun hit within the last 10 years, from 2006 to 2016. Each stadium highlights homeruns by the home team against the away team.</p></div>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.1/d3.js"></script>
-
+	
 	<script type="text/javascript" src="js/pathGenerator.js"></script>
 	<script type="text/javascript" src="js/ballpark.js"></script>
 
@@ -37,7 +37,8 @@
 				rcf: +d.rightcenterfield,
 				rf: +d.rightfield,
 				color1: d.hometeamcolor1,
-				color2: d.hometeamcolor2
+				color2: d.hometeamcolor2,
+				description: d.description
 			};
 		};
 
@@ -57,7 +58,30 @@
 				drawTrajectories();
 				drawBallparks();
 			});
-
+		function wrap(text, width) {
+    	text.each(function() {
+        var text = d3.select(this),
+        words = text.text().split(/\s+/).reverse(),
+        word,
+        line = [],
+        lineNumber = 0, //<-- 0!
+        lineHeight = 1.2, // ems
+        x = text.attr("x"), //<-- include the x!
+        y = text.attr("y"),
+        dy = text.attr("dy") ? text.attr("dy") : 0; //<-- null check
+        tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
+        while (word = words.pop()) {
+            line.push(word);
+            tspan.text(line.join(" "));
+            if (tspan.node().getComputedTextLength() > width) {
+                line.pop();
+                tspan.text(line.join(" "));
+                line = [word];
+                tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+            }
+        }
+    }); //this function takes in the text and a distance of px to wrap the text around by adding "tspan"
+}
 		function drawBallparks() {
 			var hrMax = d3.max(homeruns, function(ballparkHrs) {
 				return d3.max(ballparkHrs.values, function(season) {
@@ -111,6 +135,32 @@
 				if (!ballparkHrs) continue;
 				park.drawHomeRuns(ballparkHrs, ballparks[i]);
 				park.drawBarCharts(ballparkHrs, hrMax, ballparks[i]);
+				//console.log(ballparks[i]);
+				svg.append("text")
+    			.text("Observation:")
+    			.attr("x", 560)
+  				.attr("y", 300)
+   				.style("text-anchor", "left")
+   				.style("alignment-baseline", "middle")
+   				.style("font-size", "20px");
+
+				//console.log(ballparks[i]);
+
+                var text = svg.append("text")
+                    .text(ballparks[i].description)
+       				.attr("x", 560)
+      				.attr("y", 330)
+      				.attr("class", "wrap")
+       				.style("text-anchor", "left")
+       				.style("alignment-baseline", "middle")
+       				.style("font-size", "12px");
+
+       				wrap(text, 320);
+       	
+       	
+
+
+
 			}
 		}
 
