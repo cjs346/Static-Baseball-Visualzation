@@ -245,7 +245,7 @@ Ballpark.prototype.drawHomeRuns = function(hrs, park) {
            .attr("cx", x)
            .attr("cy", y)
            .attr("r", 4)
-           .style("fill", "rgb("+ park.color1 + ")")
+           .style("fill", "rgb("+ park.color + ")")
            .attr("fill-opacity", "0.25")
       }
       else{
@@ -287,6 +287,8 @@ Ballpark.prototype.drawBarCharts = function(hrs, hrMax, park) {
   var seasonHRs=[];
   var homeHRs=[];
 
+  hrs = hrs.sort(function(a, b) { return a.key - b.key; });
+
   hrs.forEach(function(season) {
     var numHrs = season.values.length;
     var thisSeason = +season.key;
@@ -302,19 +304,19 @@ Ballpark.prototype.drawBarCharts = function(hrs, hrMax, park) {
     // Total home runs
     svg.append("circle")
         .attr("cx", timeScale(thisSeason))
-        .attr("cy", lengthScale(numHrs))
-        .attr("r", "4px");
+        .attr("cy", lengthScale(numHrs)+24)
+        .attr("r", "3px");
     // Home team home runs
     svg.append("circle")
         .attr("cx", timeScale(thisSeason))
-        .attr("cy", lengthScale(homeTeamHrs))
-        .attr("r", "4px")
-        .style("fill", "rgb("+ park.color1 + ")");
+        .attr("cy", lengthScale(homeTeamHrs)+24)
+        .attr("r", "3px")
+        .style("fill", "rgb("+ park.color + ")");
   });
 
   var line = d3.line()
       .x(function(d) { return timeScale(d.season); })
-      .y(function(d) { return lengthScale(d.homeRuns); });
+      .y(function(d) { return lengthScale(d.homeRuns)+24; });
 
   var totalLine = svg.append("path")
       .datum(seasonHRs)
@@ -328,48 +330,63 @@ Ballpark.prototype.drawBarCharts = function(hrs, hrMax, park) {
   var homeLine = svg.append("path")
       .datum(homeHRs)
       .attr("fill", "none")
-      .attr("stroke", "rgb("+ park.color1 + ")")
+      .attr("stroke", "rgb("+ park.color + ")")
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")
       .attr("stroke-width", 1.5)
       .attr("d", line);
+
+  svg.append("text")
+    .text("Home Runs per season at " + park.ballpark)
+    .attr("text-anchor", "middle")
+    .attr("alignment-baseline", "hanging")
+    .attr("x", PARK_SIZE+202)
+    .attr("y", 12);
 
   // Create labels for the axes
   var timeAxis = d3.axisBottom(timeScale).tickFormat(d3.format("4"));
   svg.append("g")
     .attr(
       "transform",
-      "translate(0, " + (BAR_CHART_HEIGHT - 20) + ")")
+      "translate(0, " + (BAR_CHART_HEIGHT - 20+24) + ")")
     .call(timeAxis);
   var countAxis = d3.axisLeft(lengthScale);
   svg.append("g")
-    .attr("transform", "translate(" + (PARK_SIZE + 40) + ", 0)")
+    .attr("transform", "translate(" + (PARK_SIZE + 40) + ", 24)")
     .call(countAxis);
+
+  svg.append("text")
+    .text("Season")
+    .attr("text-anchor", "middle")
+    .attr("alignment-baseline", "hanging")
+    .attr("font-size", "10px")
+    .attr("x", PARK_SIZE+202)
+    .attr("y", BAR_CHART_HEIGHT + 24);
 
   // Create a legend
   svg.append("rect")
     .attr("x", PARK_SIZE + 70)
-    .attr("y", BAR_CHART_HEIGHT + 15)
+    .attr("y", BAR_CHART_HEIGHT + 15+36)
     .attr("width", 15)
     .attr("height", 15)
-    .style("fill", "rgb(" + park.color1 + ")");
+    .style("fill", "rgb(" + park.color + ")");
   svg.append("text")
     .text("Home team home runs")
     .attr("x", PARK_SIZE + 92)
-    .attr("y", BAR_CHART_HEIGHT + 22.5)
+    .attr("y", BAR_CHART_HEIGHT + 22.5+36)
     .style("text-anchor", "left")
     .style("alignment-baseline", "middle")
     .style("font-size", "12px");
   svg.append("rect")
     .attr("x", PARK_SIZE + 230)
-    .attr("y", BAR_CHART_HEIGHT + 15)
+    .attr("y", BAR_CHART_HEIGHT + 15+36)
     .attr("width", 15)
     .attr("height", 15)
     .style("fill", "black");
   svg.append("text")
     .text("Total home runs")
     .attr("x", PARK_SIZE + 252)
-    .attr("y", BAR_CHART_HEIGHT + 22.5)
+    .attr("y", BAR_CHART_HEIGHT + 22.5+36)
     .style("text-anchor", "left")
     .style("alignment-baseline", "middle")
     .style("font-size", "12px");
