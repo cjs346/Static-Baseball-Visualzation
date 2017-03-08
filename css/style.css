@@ -14,7 +14,8 @@ h1{
 
 #parallax{
     margin: 0;
-    background-image: url("baseball.png");
+    z-index: -1;
+    background-image: url("baseball4.png");
     min-height: 500px; 
     background-attachment: fixed;
     background-position: center;
@@ -22,12 +23,16 @@ h1{
     background-size: cover;
 }
 
+#trajectories{
+  margin-bottom: 50px;
+}
+
 #main{
+  padding: 24px;
   width: 904px;
+  z-index: 1;
   margin: 0 auto 50px;
-  background-color: white;
-  opacity: 0.5;
-  //background-color: rgba(255, 255, 255, 0.05);
+  background-color: #FBFBFB;
 }
 
 h1 {

@@ -1,36 +1,3 @@
-<<<<<<< Updated upstream
-hometeam,ballpark,leftfield,leftcenterfield,centerfield,rightcenterfield,rightfield,hometeamname,hometeamcolor1,hometeamcolor2,description
-LAA,Angel Stadium,347,390,396,370,350,Los Angeles Angels,"186, 0, 33","0, 50, 99",The scatter plot shows a red dominated homerun field. Almost evenly distributed with a slightly more concetration towards left field.
-SF,AT&T Park,339,404,399,421,330,San Francisco Giants,"253, 90, 30","0, 0, 0","Here at AT&T Park we see a major concetration of both home and away homeruns across left field. This usually highlights the closer distance to homeplate that area of the field has over the right end, left field is 20 feet closer than right field."
-STL,Busch Stadium,336,375,400,375,335,St. Louis Cardinals,"196, 30, 58","0, 0, 102",Busch Stadium has equidistant center field to homeplate distances. The evenly distributed home and away homeruns from almost the entire distance of the field highlights this. 
-ARI,Chase Field,330,374,407,413,334,Arizona Diamondbacks,"167, 25, 48","0, 0, 0",The long distance to direct center field limits the amount of homeruns hit there. Encouraging players to aim more right or left than usual.
-NYM,Citi Field,335,358,408,375,330,New York Mets,"255, 89, 16","0, 45, 114","A relatively new baseball field, Citi Field has a growing number of homeruns as the years go on."
-PHI,Citizens Bank Park,329,374,401,369,330,Philadelphia Phillies,"40, 72, 152","232, 24, 40","With an almost equally distributed homerun rate across the field, the Philadelphia Phillies have had a very consistent homerun count on their home field, meaning the large drops in total homeruns are from the away teams. "
-DET,Comerica Park,345,370,420,365,330,Detroit Tigers,"12, 44, 86","12, 44, 86",Another Park with a center field farther from homeplate than the other areas of concetrated homeruns. With the Detroit Tigers responsible for on average half of the homeruns on the field.
-COL,Coors Field,347,390,415,375,350,Colorado Rockies,"51, 51, 102","35, 31, 32","Coors Field, home of the Colorado Rockies, has a large concentration of homeruns on both left-center and right-center field. However the homeruns tend to be more concentrated closer to the fence on right field as opposed to left."
-LAD,Dodger Stadium,330,385,395,385,330,Los Angeles Dodgers,"239, 62, 66","0, 90, 156","Dodger Stadium has an almost even distribution of homeruns from both the home team, the LA Dodgers, and the away teams. "
-BOS,Fenway Park,310,379,389,380,302,Boston Red Sox,"189, 48, 57","13, 43, 86","Fenway Park, home of the infamous ""Green Monster,"" has a large mass of most runs on left field. However the homeruns on right field appear in almost a straight line, showing the length and difficulty of playing with the ""Green Monster."""
-TEX,Globe Life Park in Arlington,332,390,400,377,325,Texas Rangers,"192, 17, 31","0, 50, 120","At Globe Life Park in Arlington, there is a distribution of homeruns across the entirity of the field, with a shockingly large number of inside the park homeruns."
-CIN,Great American Ball Park,328,379,404,370,325,Cincinnati Reds,"198, 1, 31","0, 0, 0","The Cincinnati Reds home field, the Gream American Ball Park, has slightly more concentration of homeruns towards left field. And until 2016 the Reds were resposible for around half of the homeruns. "
-KC,Kauffman Stadium,330,387,410,387,330,Kansas City Royals,"0, 70, 135","192, 154, 91",Kansas City Royals hits a majority of the homeruns through the last 10 years at Kauffman Stadium.
-MIA,Marlins Park,344,386,407,392,335,Florida Marlins,"255, 102, 0","0, 119, 200","Only existing since 2012, Marlins Park is already showing a larger concentration of homeruns from the home team, the Marlins, towards left field as opposed to the away teams hitting towards right. "
-MIL,Miller Park,344,370,400,374,345,Milwaukee Brewers,"10, 35, 81","182, 146, 46",A very thick concentration of homeruns by both the Milwaukee Brewers and away teams along the left-center field wall.
-HOU,Minute Maid Park,315,362,408,373,326,Houston Astros,"0, 45, 98","235, 110, 31",Another Field with a large disparity between the concentrations of homeruns on the right and left side when compared to center field. Almost no homeruns are recorded in center field at Minute Maid Park.
-WSH,Nationals Park,337,377,402,370,335,Washington Nationals,"171, 0, 3","17, 34, 91",Nationals Park shows an even distribution of homeruns from right to left field that include center field. 
-OAK,Oakland-Alameda County Coliseum,330,388,400,388,330,Oakland Athletics,"0, 56, 49","239, 178, 30","The Oakland County Coliseum has one of the largest concentrations of homeruns in center field, possibly due to the short distance between the farthest point on center field and homeplate."
-BAL,Oriole Park at Camden Yards,333,364,410,373,318,Baltimore Orioles,"223, 70, 1","0, 0, 0","Oriole Park shows the largest amount of homeruns hit by the home team, the Baltimore Orioles, which is why they were ranked number ones in homeruns in 2016."
-SD,PETCO Park,334,390,396,391,322,San Diego Padres,"0, 45, 98","254, 195, 37","PETCO Park, home of the San Diego Padres, shows a clear distinction between left field, center field, and right field homerun concentrations, going in order from most to least respectivly. "
-PIT,PNC Park,325,383,399,375,320,Pittsburgh Pirates,"253, 184, 39","0, 0, 0","With one of the shortest center field walls, PNC Park shows it with one of the highest concentrations of center-field homeruns observed."
-CLE,Progressive Field,325,370,405,375,325,Cleveland Indians,"227, 25, 55","0, 43, 92","Progressive Field has a large concentration of homeruns towards right field, as opposed to most other fields which are usually leaning more towards left field."
-TOR,Rogers Centre,328,375,400,375,328,Toronto Blue Jays,"19, 74, 142","29, 45, 92",Rogers Centre highlights a larger concentration and spread pertaining towards homeruns towards left field. 
-SEA,Safeco Field,331,378,401,380,326,Seattle Mariners,"12, 44, 86","0, 92, 92","As one of the shorter fields, Safeco Field has has a very large concentration of homeruns in general, with the most homeruns hit there in 2016."
-MIN,Target Field,339,377,407,365,328,Minnesota Twins,"0, 43, 92","211, 17, 69","Target Field, has a large amount of their homeruns hit in the left-center field area."
-TB,Tropicana Field,315,370,404,370,322,Tampa Bay Rays,"9, 44, 92","143,188,230","With very little homeruns hit directly towards center field, Tropicana Field still holds a large number of homeruns hit in 2016, with a majority being from the hometeam."
-ATL,Turner Field,335,380,400,390,330,Atlanta Braves,"206, 17, 65","19, 39, 79","With a majority of the homeruns hit at Turner Field from the Braves, the home team, the conenctration of red over black is apparent and distributed almost evenly throughout the back of the field. "
-CHW,U.S. Cellular Field,330,375,400,375,335,Chicago White Sox,"0, 0, 0","196,206,212","Focusing on left field, the home of the Chicago White Sox has a large amount of homeruns packed throughout the field but condensed in that area."
-CHC,Wrigley Field,355,368,400,368,353,Chicago Cubs,"204, 52, 51","14, 51, 134",A clear distinction between the concentration of homeruns between left and right field show that hitters playing at Wrigley field tend to aim left. 
-NYY,Yankee Stadium,318,399,408,385,314,New York Yankees,"30, 68, 119","160, 159, 156","One of the few stadiums with right field having a larger concentration of homeruns than left, the New York Yankees always set the bar high with the amount of homeruns hit at their stadium. "
-=======
 hometeam,ballpark,leftfield,leftcenterfield,centerfield,rightcenterfield,rightfield,hometeamname,hometeamcolor,description
 LAA,Angel Stadium,347,390,396,370,350,Los Angeles Angels,"186, 0, 33",The scatter plot shows a red dominated homerun field. Almost evenly distributed with a slightly more concetration towards left field.
 SF,AT&T Park,339,404,399,421,330,San Francisco Giants,"253, 90, 30","Here at AT&T Park we see a major concetration of both home and away homeruns across left field. This usually highlights the closer distance to homeplate that area of the field has over the right end, left field is 20 feet closer than right field."
@@ -42,24 +9,23 @@ DET,Comerica Park,345,370,420,365,330,Detroit Tigers,"12, 44, 86",Another Park w
 COL,Coors Field,347,390,415,375,350,Colorado Rockies,"51, 51, 102","Coors Field, home of the Colorado Rockies, has a large concentration of homeruns on both left-center and right-center field. However the homeruns tend to be more concentrated closer to the fence on right field as opposed to left."
 LAD,Dodger Stadium,330,385,395,385,330,Los Angeles Dodgers,"239, 62, 66","Dodger Stadium has an almost even distribution of homeruns from both the home team, the LA Dodgers, and the away teams. "
 BOS,Fenway Park,310,379,389,380,302,Boston Red Sox,"189, 48, 57","Fenway Park, home of the infamous ""Green Monster,"" has a large mass of most runs on left field. However the homeruns on right field appear in almost a straight line, showing the length and difficulty of playing with the ""Green Monster."""
-TEX,Globe Life Park in Arlington,332,390,400,377,325,Texas Rangers,"192, 17, 31",word
-CIN,Great American Ball Park,328,379,404,370,325,Cincinnati Reds,"198, 1, 31",word
-KC,Kauffman Stadium,330,387,410,387,330,Kansas City Royals,"0, 70, 135",word
-MIA,Marlins Park,344,386,407,392,335,Florida Marlins,"255, 102, 0",word
-MIL,Miller Park,344,370,400,374,345,Milwaukee Brewers,"10, 35, 81",word
-HOU,Minute Maid Park,315,362,408,373,326,Houston Astros,"0, 45, 98",word
-WSH,Nationals Park,337,377,402,370,335,Washington Nationals,"171, 0, 3",word
-OAK,Oakland-Alameda County Coliseum,330,388,400,388,330,Oakland Athletics,"0, 56, 49",word
-BAL,Oriole Park at Camden Yards,333,364,410,373,318,Baltimore Orioles,"223, 70, 1",word
-SD,PETCO Park,334,390,396,391,322,San Diego Padres,"0, 45, 98",word
-PIT,PNC Park,325,383,399,375,320,Pittsburgh Pirates,"253, 184, 39",word
-CLE,Progressive Field,325,370,405,375,325,Cleveland Indians,"227, 25, 55",word
-TOR,Rogers Centre,328,375,400,375,328,Toronto Blue Jays,"19, 74, 142",word
-SEA,Safeco Field,331,378,401,380,326,Seattle Mariners,"12, 44, 86",word
-MIN,Target Field,339,377,407,365,328,Minnesota Twins,"0, 43, 92",word
-TB,Tropicana Field,315,370,404,370,322,Tampa Bay Rays,"9, 44, 92",word
-ATL,Turner Field,335,380,400,390,330,Atlanta Braves,"206, 17, 65",word
-CHW,U.S. Cellular Field,330,375,400,375,335,Chicago White Sox,"196,206,212",word
-CHC,Wrigley Field,355,368,400,368,353,Chicago Cubs,"204, 52, 51",word
-NYY,Yankee Stadium,318,399,408,385,314,New York Yankees,"30, 68, 119",word
->>>>>>> Stashed changes
+TEX,Globe Life Park in Arlington,332,390,400,377,325,Texas Rangers,"192, 17, 31","At Globe Life Park in Arlington, there is a distribution of homeruns across the entirity of the field, with a shockingly large number of inside the park homeruns."
+CIN,Great American Ball Park,328,379,404,370,325,Cincinnati Reds,"198, 1, 31","The Cincinnati Reds home field, the Gream American Ball Park, has slightly more concentration of homeruns towards left field. And until 2016 the Reds were resposible for around half of the homeruns. "
+KC,Kauffman Stadium,330,387,410,387,330,Kansas City Royals,"0, 70, 135",Kansas City Royals hits a majority of the homeruns through the last 10 years at Kauffman Stadium.
+MIA,Marlins Park,344,386,407,392,335,Florida Marlins,"255, 102, 0","Only existing since 2012, Marlins Park is already showing a larger concentration of homeruns from the home team, the Marlins, towards left field as opposed to the away teams hitting towards right. "
+MIL,Miller Park,344,370,400,374,345,Milwaukee Brewers,"10, 35, 81",A very thick concentration of homeruns by both the Milwaukee Brewers and away teams along the left-center field wall.
+HOU,Minute Maid Park,315,362,408,373,326,Houston Astros,"0, 45, 98",Another Field with a large disparity between the concentrations of homeruns on the right and left side when compared to center field. Almost no homeruns are recorded in center field at Minute Maid Park.
+WSH,Nationals Park,337,377,402,370,335,Washington Nationals,"171, 0, 3",Nationals Park shows an even distribution of homeruns from right to left field that include center field. 
+OAK,Oakland Coliseum,330,388,400,388,330,Oakland Athletics,"0, 56, 49","The Oakland County Coliseum has one of the largest concentrations of homeruns in center field, possibly due to the short distance between the farthest point on center field and homeplate."
+BAL,Oriole Park at Camden Yards,333,364,410,373,318,Baltimore Orioles,"223, 70, 1","Oriole Park shows the largest amount of homeruns hit by the home team, the Baltimore Orioles, which is why they were ranked number ones in homeruns in 2016."
+SD,PETCO Park,334,390,396,391,322,San Diego Padres,"0, 45, 98","PETCO Park, home of the San Diego Padres, shows a clear distinction between left field, center field, and right field homerun concentrations, going in order from most to least respectivly. "
+PIT,PNC Park,325,383,399,375,320,Pittsburgh Pirates,"253, 184, 39","With one of the shortest center field walls, PNC Park shows it with one of the highest concentrations of center-field homeruns observed."
+CLE,Progressive Field,325,370,405,375,325,Cleveland Indians,"227, 25, 55","Progressive Field has a large concentration of homeruns towards right field, as opposed to most other fields which are usually leaning more towards left field."
+TOR,Rogers Centre,328,375,400,375,328,Toronto Blue Jays,"19, 74, 142",Rogers Centre highlights a larger concentration and spread pertaining towards homeruns towards left field. 
+SEA,Safeco Field,331,378,401,380,326,Seattle Mariners,"12, 44, 86","As one of the shorter fields, Safeco Field has has a very large concentration of homeruns in general, with the most homeruns hit there in 2016."
+MIN,Target Field,339,377,407,365,328,Minnesota Twins,"0, 43, 92","Target Field, has a large amount of their homeruns hit in the left-center field area."
+TB,Tropicana Field,315,370,404,370,322,Tampa Bay Rays,"9, 44, 92","With very little homeruns hit directly towards center field, Tropicana Field still holds a large number of homeruns hit in 2016, with a majority being from the hometeam."
+ATL,Turner Field,335,380,400,390,330,Atlanta Braves,"206, 17, 65","With a majority of the homeruns hit at Turner Field from the Braves, the home team, the conenctration of red over black is apparent and distributed almost evenly throughout the back of the field. "
+CHW,U.S. Cellular Field,330,375,400,375,335,Chicago White Sox,"196,206,212","Focusing on left field, the home of the Chicago White Sox has a large amount of homeruns packed throughout the field but condensed in that area."
+CHC,Wrigley Field,355,368,400,368,353,Chicago Cubs,"204, 52, 51",A clear distinction between the concentration of homeruns between left and right field show that hitters playing at Wrigley field tend to aim left. 
+NYY,Yankee Stadium,318,399,408,385,314,New York Yankees,"30, 68, 119","One of the few stadiums with right field having a larger concentration of homeruns than left, the New York Yankees always set the bar high with the amount of homeruns hit at their stadium. "
