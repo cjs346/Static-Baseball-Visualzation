@@ -275,7 +275,7 @@ Ballpark.prototype.drawBarCharts = function(hrs, hrMax, park) {
     .attr("y", 0)
     .attr("width", BAR_CHART_WIDTH)
     .attr("height", PARK_SIZE)
-    .style("fill", "rgba(0, 0, 0, 0.05)")
+    .style("fill", "rgba(255, 255, 255, 0)")
 
   var timeScale = d3.scaleLinear()
                     .domain([2006, 2016])
@@ -339,6 +339,7 @@ Ballpark.prototype.drawBarCharts = function(hrs, hrMax, park) {
   svg.append("text")
     .text("Home Runs per season at " + park.ballpark)
     .attr("text-anchor", "middle")
+    .attr("font-size", "16px")
     .attr("alignment-baseline", "hanging")
     .attr("x", PARK_SIZE+202)
     .attr("y", 12);
@@ -390,6 +391,4 @@ Ballpark.prototype.drawBarCharts = function(hrs, hrMax, park) {
     .style("text-anchor", "left")
     .style("alignment-baseline", "middle")
     .style("font-size", "12px");
-//console.log(park);
-
 };
