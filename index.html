@@ -4,23 +4,25 @@
 	<title>Project 1</title>
 	<link rel="stylesheet" href="css/style.css">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-</head>
-<body>
-	<div id="main">
-		<h1>Where do the balls go?</h1>
-	</div>
-	<div id="trajectories">
-		<h2>Long home runs vs. high home runs</h2>
-		<p> From this trajectory mapping we can clearly see that the highest hit homeruns do not correspond to the farthest homeruns hit.</p>
-	</div>
-	<div id="parks"><h2> Homeruns or Away-runs?</h2>
-	<p> Underneath every major league stadium is mapped to scale along with every homerun hit within the last 10 years, from 2006 to 2016. Each stadium highlights homeruns by the home team against the away team.</p></div>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.1/d3.js"></script>
-
 	<script type="text/javascript" src="js/pathGenerator.js"></script>
 	<script type="text/javascript" src="js/ballpark.js"></script>
+</head>
+<body>
+	<div id="parallax">
+		<h1>Where do the balls go?</h1>
+	</div>
 
-
+	<div id="main">
+		<div id="trajectories">
+			<h2>Long home runs vs. high home runs</h2>
+			<p>From this trajectory mapping we can clearly see that the highest hit homeruns do not correspond to the farthest homeruns hit.</p>
+		</div>
+		<div id="parks">
+			<h2>Homeruns or Away-runs?</h2>
+			<p>Underneath every major league stadium is mapped to scale along with every homerun hit within the last 10 years, from 2006 to 2016. Each stadium highlights homeruns by the home team against the away team.</p>
+		</div>
+	</div>
 	<script type="text/javascript">
 		var ballparks;
 		var homeruns;
@@ -36,7 +38,7 @@
 				cf: +d.centerfield,
 				rcf: +d.rightcenterfield,
 				rf: +d.rightfield,
-				color: d.hometeamcolor1,
+				color: d.hometeamcolor,
 				description: d.description
 			};
 		};
@@ -47,12 +49,12 @@
 			.await(function(error, rawBallparks, rawHomeruns) {
 				ballparks = rawBallparks;
 				homeruns = d3.nest()
-										 .key(function(d) { return d.ballpark; })
-										 .key(function(d) { return d.season; })
-										 .entries(rawHomeruns);
+							.key(function(d) { return d.ballpark; })
+							.key(function(d) { return d.season; })
+							.entries(rawHomeruns);
 				seasonHrs = d3.nest()
-											.key(function(d) { return d.season; })
-											.entries(rawHomeruns);
+							.key(function(d) { return d.season; })
+							.entries(rawHomeruns);
 
 				drawTrajectories();
 				drawBallparks();
@@ -129,8 +131,6 @@
 					rf: ballparks[i].rf,
 				});
 
-				//console.log(ballparkHrs);
-
 				if (!ballparkHrs) continue;
 				park.drawHomeRuns(ballparkHrs, ballparks[i]);
 				park.drawBarCharts(ballparkHrs, hrMax, ballparks[i]);
@@ -143,8 +143,6 @@
    				.style("alignment-baseline", "middle")
    				.style("font-size", "20px");
 
-				//console.log(ballparks[i]);
-
                 var text = svg.append("text")
                     .text(ballparks[i].description)
        				.attr("x", 560)
@@ -155,11 +153,6 @@
        				.style("font-size", "12px");
 
        				wrap(text, 320);
-
-
-
-
-
 			}
 		}
 
@@ -169,9 +162,9 @@
 
 			// Create an SVG element to draw the trajectories on
 			var svg = d3.select("#trajectories")
-									.append("svg")
-									.attr("width", TRAJ_WIDTH)
-									.attr("height", TRAJ_HEIGHT);
+						.append("svg")
+						.attr("width", TRAJ_WIDTH)
+						.attr("height", TRAJ_HEIGHT);
 
 			// Create a legend for the highest and longest home runs
 			svg.append("rect")
@@ -181,31 +174,31 @@
 				 .attr("height", 15)
 				 .style("fill", "rgba(0, 0, 128, 0.5)");
 		 	svg.append("rect")
-				 .attr("x", TRAJ_WIDTH - 300)
-			   .attr("y", 45)
-			   .attr("width", 15)
-				 .attr("height", 15)
-				 .style("fill", "rgba(128, 0, 0, 0.5)");
+				.attr("x", TRAJ_WIDTH - 300)
+				.attr("y", 45)
+				.attr("width", 15)
+				.attr("height", 15)
+				.style("fill", "rgba(128, 0, 0, 0.5)");
 			svg.append("text")
-				 .text("Longest home run of the season")
-				 .attr("x", TRAJ_WIDTH - 275)
-				 .attr("y", 27.5)
-				 .style("alignment-baseline", "middle")
-				 .style("text-anchor", "start");
+				.text("Longest home run of the season")
+				.attr("x", TRAJ_WIDTH - 275)
+				.attr("y", 27.5)
+				.style("alignment-baseline", "middle")
+				.style("text-anchor", "start");
 		  svg.append("text")
-			   .text("Highest home run of the season")
-			 	 .attr("x", TRAJ_WIDTH - 275)
-			 	 .attr("y", 52.5)
-			 	 .style("alignment-baseline", "middle")
-				 .style("text-anchor", "start");
+				.text("Highest home run of the season")
+				.attr("x", TRAJ_WIDTH - 275)
+				.attr("y", 52.5)
+				.style("alignment-baseline", "middle")
+				.style("text-anchor", "start");
 
 			// Create scales for plotting the trajectories
 			var distanceScale = d3.scaleLinear()
-														.domain([0, 504])
-														.range([50, TRAJ_WIDTH - 20]);
+								.domain([0, 504])
+								.range([50, TRAJ_WIDTH - 20]);
 			var heightScale = d3.scaleLinear()
-													.domain([0, 180])
-													.range([TRAJ_HEIGHT - 40, 20]);
+								.domain([0, 180])
+								.range([TRAJ_HEIGHT - 40, 20]);
 
 			// Create axes for the home runs
 			var distanceAxis = d3.axisBottom(distanceScale);
@@ -265,10 +258,10 @@
 	 				)
 	 				.getPath();
  				svg.append("path")
-	 				 .attr("d", highPath.toString())
-	 			 	 .style("stroke", "rgba(128, 0, 0, 0.4)")
-	 			   .style("stroke-width", 2)
-	  			 .style("fill", "none");
+					.attr("d", highPath.toString())
+					.style("stroke", "rgba(128, 0, 0, 0.4)")
+					.style("stroke-width", 2)
+					.style("fill", "none");
 			});
 		}
 	</script>

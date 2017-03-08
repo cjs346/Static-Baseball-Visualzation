@@ -5,40 +5,45 @@ body {
 }
 
 body {
-  background: repeating-linear-gradient(
-    to right,
-    #F4F9FF,
-    #F4F9FF 8px,
-    #FFFFFF 8px,
-    #FFFFFF 16px);
+    background-color: rgba(255, 255, 255, 0);
 }
 
-#parks,
-#trajectories {
+h1{
+  color: white;
+}
+
+#parallax{
+    margin: 0;
+    background-image: url("baseball.png");
+    min-height: 500px; 
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#main{
   width: 904px;
   margin: 0 auto 50px;
-}
-
-#trajectories {
-  background-color: rgba(255, 255, 255, 1);
+  background-color: white;
+  opacity: 0.5;
+  //background-color: rgba(255, 255, 255, 0.05);
 }
 
 h1 {
+  margin: 0;
   font-family: "Open Sans";
   text-align: center;
+  vertical-align: middle;
+  line-height: 500px;
 }
 
 h2 {
   font-family: "Open Sans";
 }
 
-#parks{
-  background-color: rgba(255, 255, 255, 1);
-}
-
 #parks svg {
   margin-bottom: 50px;
-  background-color: rgba(255, 255, 255, 1);
 }
 
 text,p {
@@ -51,7 +56,7 @@ text,p {
 }
 
 .sand {
-  fill: #D7D7D7;
+  fill:  #D7D7D7;
   stroke: none;
 }
 
@@ -65,17 +70,9 @@ text,p {
   stroke: none;
 }
 
-.ball {
-  fill: red;
-}
-
-.ball-away {
-  fill: blue;
-}
-
 .bar-label {
   alignment-baseline: hanging;
   text-anchor: middle;
-  font-family: Helvetica;
+  font-family: "Open Sans";
   font-size: 12px;
 }
